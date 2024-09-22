@@ -26,8 +26,8 @@ void renew(int threshold) {
             }
 
             if (dp[r-1][c] == -1 && dp[r][c-1] == -1) {
-                dp[n][n] = MAX;
-                return;
+                dp[r][c] = -1;
+                continue;
             }
 
             if (dp[r-1][c] != -1 && dp[r][c-1] == -1) {
@@ -39,12 +39,8 @@ void renew(int threshold) {
             else {
                 dp[r][c] = max(table[r][c], min(dp[r-1][c], dp[r][c-1]));
             }
-
-
         }
-    }
-
-    
+    } 
 }
 
 int main() {
@@ -60,15 +56,10 @@ int main() {
     }
 
     int answer = MAX;
-    for (int i = minV; i <= table[1][1]; i++) {
-        // cout << i << '\n';
+    for (int i = minV; i <= MAX; i++) {
         renew(i);
-        // for (int i = 1; i <= n; i++) {
-        // for (int j = 1; j <= n; j++) cout << dp[i][j] << ' ';
-        // cout << '\n';
-        // }
 
-        // cout << '\n';
+        if (dp[n][n] == -1) continue;
         answer = min(answer, dp[n][n] - i);
     }
 
