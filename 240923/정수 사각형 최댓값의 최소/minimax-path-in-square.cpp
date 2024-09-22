@@ -21,8 +21,8 @@ int main() {
         dp[i][1] = max(table[i][1], dp[i-1][1]);
     }
 
-    for (int r = 1; r <= n; r++) {
-        for (int c = 1; c <= n; c++) {
+    for (int r = 2; r <= n; r++) {
+        for (int c = 2; c <= n; c++) {
             dp[r][c] = max(table[r][c], min(dp[r-1][c], dp[r][c-1]));
         }
     }
