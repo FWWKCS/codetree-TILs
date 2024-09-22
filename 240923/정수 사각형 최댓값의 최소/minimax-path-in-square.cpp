@@ -15,6 +15,7 @@ int main() {
         }
     }
 
+    dp[1][1] = table[1][1];
     for (int i = 2; i <= n; i++) {
         dp[1][i] = max(table[1][i], dp[1][i-1]);
         dp[i][1] = max(table[i][1], dp[i-1][1]);
@@ -23,6 +24,7 @@ int main() {
     for (int r = 1; r <= n; r++) {
         for (int c = 1; c <= n; c++) {
             dp[r][c] = max(table[r][c], min(dp[r-1][c], dp[r][c-1]));
+            cout << dp[r][c] << ' ';
         }
     }
 
