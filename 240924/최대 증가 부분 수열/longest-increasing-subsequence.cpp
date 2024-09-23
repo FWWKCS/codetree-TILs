@@ -13,7 +13,7 @@ int main() {
     }
 
     dp[0] = 1;
-    int answer = 0;
+    int answer = 1;
     for (int i = 1; i < N; i++) {
         for (int j = i-1; j > -1; j--) {
             if (table[j] < table[i]) dp[i] = max(dp[i], dp[j] + 1);
