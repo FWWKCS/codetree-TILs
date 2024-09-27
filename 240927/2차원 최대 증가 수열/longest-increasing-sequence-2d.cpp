@@ -15,20 +15,31 @@ int main() {
     }
 
     dp[1][1] = 1;
-    for (int i = 2; i <= m; i++) dp[0][i] = 0;
-    for (int i = 2; i <= n; i++) dp[i][0] = 0;
+    for (int i = 2; i <= m; i++) dp[1][i] = -1;
+    for (int i = 2; i <= n; i++) dp[i][1] = -1;
 
     int answer = 1;
-    for (int r = 1; r <= n; r++) {
-        for (int c = 1; c <= m; c++) {
+    for (int r = 2; r <= n; r++) {
+        for (int c = 2; c <= m; c++) {
+            bool found = false;
             for (int y = r-1; y > 0; y--) {
                 for (int x = c-1; x > 0; x--) {
-                    if (table[y][x] < table[r][c]) dp[r][c] = max(dp[r][c], dp[y][x]+1);
+                    if (table[r][c] > table[y][x] && dp[y][x] != -1) {
+                        dp[r][c] = max(dp[r][c], dp[y][x] + 1);
+                        found = true;
+                    }
                 }
             }
-            answer = max(answer, dp[r][c]);
+            
+            if (!found) dp[r][c] = -1;
+            else answer = max(answer, dp[r][c]);
         }
     } 
+
+    // for (int i = 1; i <= n; i++) {
+    //     for (int j = 1; j <= m; j++) cout << dp[i][j] << ' ';
+    //     cout << '\n';
+    // }
 
     cout << answer;
     return 0;
