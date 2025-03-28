@@ -4,6 +4,7 @@
 using namespace std;
 
 int n, m;
+vector<pair<int, int>> lines;
 vector<vector<int>> bo;
 vector<int> target;
 
@@ -23,22 +24,16 @@ void check(vector<vector<int>>& board, vector<int>& result) {
     // cout << '\n';
 }
 
-void dfs(int depth, int lR, int lC) {
-    if (depth > m || depth > answer) return;
+void dfs(int depth, int last) {
+    if (depth > answer) return;
 
-    for (int r = lR; r <= 15; r++) {
-        for (int c = 1; c < n; c++) {
-            if (r == lR && c <= lC) continue;
+    for (int i = last+1; i < m; i++) {
+        int r = lines[i].first, c = lines[i].second;
 
-            if (rm[r][c] != 0) continue;
-
-            // dfs(depth, r, c+1);
-
-            rm[r][c] = 1;
-            rm[r][c+1] = -1;
-            dfs(depth+1, r, c);
-            rm[r][c] = rm[r][c+1] = 0;
-        }
+        rm[r][c] = 1;
+        rm[r][c+1] = -1;
+        dfs(depth+1, i);
+        rm[r][c] = rm[r][c+1] = 0;
     }
 
     
@@ -58,6 +53,7 @@ int main() {
     for (int i = 1; i <= n; i++) target[i] = i;
     for (int i = 0; i < m; i++) {
         int a, b; cin >> a >> b;
+        lines.push_back({b, a});
         bo[b][a] = 1;
         bo[b][a+1] = -1;
     }
@@ -65,7 +61,7 @@ int main() {
     check(bo, target);
 
     // Please write your code here.
-    dfs(0, 1, 1);
+    dfs(0, -1);
 
     cout << answer;
 
