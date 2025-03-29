@@ -10,38 +10,37 @@ int weight[10][10];
 pair<int, int> A, B;
 int answer = 0;
 
+int X, Y;
+
+void gr(vector<int>& v, int k, int cur, int w, int& z) {
+    z = max(z, w);
+    for (int i = k+1; i < m; i++) {
+        if (cur + v[i] <= c) {
+            gr(v, i, cur+v[i], w+(v[i]*v[i]), z);
+        }
+    }
+}
+
+
 void check() {
-    int W = 0;
     vector<int> vA, vB;
     for (int i = 0; i < m; i++) {
         vA.push_back(weight[A.first][A.second+i]);
         vB.push_back(weight[B.first][B.second+i]);
     }
+    
+    X = 0, Y = 0;
+    gr(vA, -1, 0, 0, X);
+    gr(vB, -1, 0, 0, Y);
 
-    sort(vA.rbegin(), vA.rend());
-    sort(vB.rbegin(), vB.rend());
 
-    // for (auto x : vA) cout << x << ' '; cout << '\n';
-    // for (auto x : vB) cout << x << ' '; cout << '\n';
- 
-    int tmp = c;
-    for (int i = 0; i < m; i++) {
-        if (vA[i] <= tmp) {
-            W += vA[i]*vA[i];
-            tmp -= vA[i];
-        }
+    if (X+Y > answer) {
+        // for (auto x : vA) cout << x << ' '; cout << '\n';
+        // for (auto x : vB) cout << x << ' '; cout << '\n';
+        // cout << X << ' ' << Y << '\n';
+        // cout << X+Y << '\n';
+        answer = X+Y;   
     }
-
-    tmp = c;
-    for (int i = 0; i < m; i++) {
-        if (vB[i] <= tmp) {
-            W += vB[i]*vB[i];
-            tmp -= vB[i];
-        }
-    }
-
-    // cout << W << '\n';
-    answer = max(answer, W);
 }
 
 void dfs(int depth) {
