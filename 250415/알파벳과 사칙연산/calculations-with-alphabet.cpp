@@ -1,13 +1,14 @@
 #include <iostream>
+#include <climits>
 
 using namespace std;
 
 string expression;
-int answer = 0;
+long long answer = LLONG_MIN;
 int value[6] = {0, };
 
-int check() {
-    int cur = value[expression[0]-'a'];
+long long check() {
+    long long cur = value[expression[0]-'a'];
     for (int i = 1; i < expression.length(); i+=2) {
         switch (expression[i]) {
             case '+':
