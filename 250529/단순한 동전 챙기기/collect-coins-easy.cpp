@@ -13,7 +13,7 @@ int sr, sc, er, ec;
 int answer = 1e9;
 void route(int steps, int cr, int cc, int last, int depth) {
     if (depth >= 3) {
-        // E까지의 유클리디안 거리
+        // E까지의 맨해튼 거리
         answer = min(answer,
                     steps + abs(er-cr) + abs(ec-cc));
     }
