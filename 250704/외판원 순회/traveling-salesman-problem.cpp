@@ -10,7 +10,7 @@ vector<int> visited;
 
 void route(int total, vector<int>& visited, int cur, int depth) {
     if (depth == n) {
-        answer = min(answer, total+A[cur][0]);
+        if (A[cur][0] != 0) answer = min(answer, total+A[cur][0]);
         return;
     }
 
