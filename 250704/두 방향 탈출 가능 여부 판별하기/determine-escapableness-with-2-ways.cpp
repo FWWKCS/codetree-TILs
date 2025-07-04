@@ -27,7 +27,7 @@ void dfs(int cr, int cc) {
         if (nr > -1 && nr < n && nc > -1 && nc < m && grid[nr][nc] == 1 && !visited[nr][nc]) {
             visited[nr][nc] = 1;
             dfs(nr, nc);
-            visited[nr][nc] = 0;
+            // visited[nr][nc] = 0;
         }
     }
 }
