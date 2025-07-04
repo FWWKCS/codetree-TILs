@@ -11,7 +11,7 @@ int dc[2] = {0, 1};
 int answer = 0;
 
 void dfs(int cr, int cc) {
-    if (cr == n-1 && cc == n-1) {
+    if (cr == n-1 && cc == m-1) {
         answer = 1;
         return;
     }
@@ -20,7 +20,7 @@ void dfs(int cr, int cc) {
         int nr = dr[i] + cr;
         int nc = dc[i] + cc;
 
-        if (grid[nr][nc] == 1) {
+        if (nr > -1 && nr < n && nc > -1 && nc < m && grid[nr][nc] == 1) {
             dfs(nr, nc);
         }
     }
