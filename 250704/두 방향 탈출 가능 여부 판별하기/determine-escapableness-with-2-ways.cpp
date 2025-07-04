@@ -19,6 +19,8 @@ void dfs(int cr, int cc) {
     }
 
     for (int i = 0; i < 2; i++) {
+        if (answer) return; 
+        
         int nr = dr[i] + cr;
         int nc = dc[i] + cc;
 
