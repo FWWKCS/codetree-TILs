@@ -8,7 +8,7 @@ int grid[50][50];
 int dr[4] = {-1, 1, 0, 0};
 int dc[4] = {0, 0, -1, 1};
 
-int aK = 0, t = 0;
+int aK = -1, t = -1;
 
 vector<vector<int>> visited;
 void dfs(int cr, int cc, int K) {
