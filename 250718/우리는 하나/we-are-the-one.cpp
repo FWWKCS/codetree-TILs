@@ -47,15 +47,11 @@ void dfs(int last, int depth) {
         return;
     }
 
-    int lr = last / n;
-    int lc = last % n;
-
-    for (int r = lr; r < n; r++) {
-        for (int c = lc+1; c < n; c++) {
-            sel.push_back({r, c});
-            dfs(r*n+c, depth+1);
-            sel.pop_back();
-        }
+    for (int idx = last; idx < n * n; idx++) {
+        int r = idx / n, c = idx % n;
+        sel.push_back({r, c});
+        dfs(idx + 1, depth + 1);
+        sel.pop_back();
     }
 }
 
