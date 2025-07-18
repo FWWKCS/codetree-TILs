@@ -28,9 +28,9 @@ void bfs() {
         for (int i = 0; i < 4; i++) {
             int nr = dr[i] + cr, nc = dc[i] + cc;
             if (nr > -1 && nr < n && nc > -1 && nc < n && !visited[nr][nc]) {
-                visited[nr][nc] = 1;
                 int gaps = abs(grid[cr][cc] - grid[nr][nc]);
                 if (u <= gaps && gaps <= d) {
+                    visited[nr][nc] = 1;
                     total++;
                     q.push({nr, nc});
                 }
@@ -41,16 +41,19 @@ void bfs() {
     answer = max(answer, total);
 }
 
-void dfs(int lr, int lc, int depth) {
+void dfs(int last, int depth) {
     if (depth == k) {
         bfs();
         return;
     }
 
+    int lr = last / n;
+    int lc = last % n;
+
     for (int r = lr; r < n; r++) {
         for (int c = lc+1; c < n; c++) {
             sel.push_back({r, c});
-            dfs(lr, lc, depth+1);
+            dfs(r*n+c, depth+1);
             sel.pop_back();
         }
     }
@@ -66,7 +69,7 @@ int main() {
     }
 
     // Please write your code here.
-    dfs(0, -1, 0);
+    dfs(0, 0);
     cout << answer;
     return 0;
 }
