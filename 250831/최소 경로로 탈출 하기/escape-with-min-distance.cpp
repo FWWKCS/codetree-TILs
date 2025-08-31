@@ -27,7 +27,7 @@ void bfs() {
             int nr = dr[i] + cr;
             int nc = dc[i] + cc;
 
-            if (nr > -1 && nr < n && nc > -1 && nc < m && a[nr][nc] != 0 && board[nr][nc] > cd) {
+            if (nr > -1 && nr < n && nc > -1 && nc < m && a[nr][nc] != 0 && board[nr][nc] > cd+1) {
                 q.push(make_tuple(nr, nc, cd+1));
                 board[nr][nc] = cd+1;
             }
