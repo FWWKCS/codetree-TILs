@@ -27,7 +27,7 @@ void bfs() {
             int nr = dr[i] + cr;
             int nc = dc[i] + cc;
 
-            if (nr > -1 && nr < n && nc > -1 && nc < m && a[nr][nc] != 0 && board[nr][nc] > cd+1) {
+            if (nr > -1 && nr < n && nc > -1 && nc < m && a[nr][nc] != 0 && board[nr][nc] > cd) {
                 q.push(make_tuple(nr, nc, cd+1));
                 board[nr][nc] = cd+1;
             }
@@ -48,7 +48,7 @@ int main() {
     // Please write your code here.
 
     bfs();
-    cout << board[n-1][m-1];
+    cout << (board[n-1][m-1] < 1e9 ? board[n-1][m-1] : -1);
 
     return 0;
 }
