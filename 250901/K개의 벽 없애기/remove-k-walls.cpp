@@ -13,6 +13,12 @@ int dr[4] = {-1, 1, 0, 0};
 int dc[4] = {0, 0, -1, 1};
 
 int bfs() {
+    // for (int i = 0; i < n; i++) {
+    //     for (int j = 0; j < n; j++) cout << grid[i][j] << ' ';
+    //     cout << '\n';
+    // }
+
+
     vector<vector<int>> board(n, vector<int>(n, 1e9));
     board[r1][c1] = 0;
     queue<tuple<int,int,int>> q;
@@ -39,18 +45,19 @@ int bfs() {
 }
 
 void dfs(int depth, int pos) {
+    // cout << depth << ' ' << pos << '\n';
     if (depth == k) {
         answer = min(answer, bfs());
         return;
     }
 
-    for (int r = pos / n; r < n; r++) {
-        for (int c = pos % n; c < n; c++) {
-            if (grid[r][c] == 1) {
-                grid[r][c] = 0;
-                dfs(depth+1, r*n+c+1);
-                grid[r][c] = 1;
-            }
+    for (int x = pos; x < n*n; x++) {
+        int r = x / n;
+        int c = x % n;
+        if (grid[r][c] == 1) {
+            grid[r][c] = 0;
+            dfs(depth+1, x+1);
+            grid[r][c] = 1;
         }
     }
 }
