@@ -33,11 +33,13 @@ int bfs(int r, int c) {
             int nr = dr[i] + cr;
             int nc = dc[i] + cc;
             if (nr > -1 && nr < n && nc > -1 && nc < n && grid[nr][nc] != 1 && board[nr][nc] > dt+1) {
-                q.push(make_tuple(nr, nc, dt+1));
-                board[nr][nc] = dt+1;
                 if (grid[nr][nc] == 3) {
                     // renew
-                    result = min(result, board[nr][nc]);
+                    result = min(result, dt+1);
+                }
+                else {
+                    q.push(make_tuple(nr, nc, dt+1));
+                    board[nr][nc] = dt+1;
                 }
             }
         }
