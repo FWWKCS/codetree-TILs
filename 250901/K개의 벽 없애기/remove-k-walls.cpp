@@ -35,7 +35,7 @@ int bfs() {
         }
     }
 
-    return board[n-1][n-1];
+    return board[r2][c2];
 }
 
 void dfs(int depth, int pos) {
