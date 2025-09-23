@@ -18,7 +18,9 @@ int main() {
     // Please write your code here.
     for (int i = 1; i <= M; i++) {
         for (int j = 0; j < N; j++) {
-            if (i-coin[j] >= 0) dp[i] = max(dp[i], dp[i-coin[j]]+1);
+            if (i-coin[j] >= 0 && dp[i-coin[j]] > -1) {
+                dp[i] = max(dp[i], dp[i-coin[j]]+1);
+            }
         }
     }
 
