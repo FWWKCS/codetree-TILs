@@ -23,7 +23,9 @@ int main() {
         }
     }
 
-    cout << dp[M];
+    int answer = 0;
+    for (auto x : dp) answer = max(answer, x);
+    cout << answer;
 
     return 0;
 }
