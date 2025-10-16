@@ -15,7 +15,8 @@ int main() {
 
     // Please write your code here.
     // dp[r][c]: r번째 숫자를 더하거나 빼서 c가 만들어질 수 있는 경우의 수
-    dp[0][nums[0]+OFFSET] = dp[0][OFFSET-nums[0]] = 1;
+    dp[0][nums[0]+OFFSET]++;
+    dp[0][OFFSET-nums[0]]++;
     for (int r = 1; r < N; r++) {
         for (int c = -OFFSET; c <= OFFSET; c++) {
             if (c-nums[r] >= -OFFSET) { // 이전 값에서 nums[r]을 더함
