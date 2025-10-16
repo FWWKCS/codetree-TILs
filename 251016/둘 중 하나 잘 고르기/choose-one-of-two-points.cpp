@@ -5,33 +5,25 @@ using namespace std;
 int N;
 int red[201];
 int blue[201];
-vector<vector<vector<int>>> dp;
+vector<vector<int>> dp;
 int main() {
     cin >> N;
-    dp.resize(2*N+1, vector<vector<int>>(N+1, vector<int>(N+1, 0)));
+    dp.resize(2*N+1, vector<int>(N+1, -1e9));
     for (int i = 1; i <= 2 * N; i++) {
         cin >> red[i] >> blue[i];
     }
 
     // Please write your code here.
-    // dp[i][r][c]: i번째 카드를 고르는 상황에서 red r번, blue c번 일때의 최대 합
-    for (int i = 1; i <= 2*N; i++) {
-        for (int r = 0; r <= N; r++) {
-            for (int c = 0; c <= N; c++) {
-                if (r+c == i) {
-                    if (r > 0) {
-                        // red 선택
-                        dp[i][r][c] = max(dp[i][r][c], dp[i-1][r-1][c]+red[i]);
-                    }
-                    if (c > 0) {
-                        // blue 선택
-                        dp[i][r][c] = max(dp[i][r][c], dp[i-1][r][c-1]+blue[i]);
-                    }
-                }
-            }
+    // dp[r][c]: r번째 카드를 고를때 red를 c번 고른 상태의 최대합
+    dp[0][0] = 0;
+    for (int r = 1; r <= 2*N; r++) {
+        for (int c = 0; c <= N; c++) {
+            if (c > 0 && dp[r-1][c-1] >= 0) dp[r][c] = max(dp[r][c], 
+                                                        max(dp[r-1][c]+blue[r], dp[r-1][c-1]+red[r]));
+            else if (dp[r-1][c] >= 0) dp[r][c] = max(dp[r][c], dp[r-1][c]+blue[r]);
         }
     }
 
-    cout << dp[2*N][N][N];
+    cout << dp[2*N][N];
     return 0;
 }
