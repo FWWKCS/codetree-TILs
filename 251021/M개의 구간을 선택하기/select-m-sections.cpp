@@ -16,6 +16,7 @@ int main() {
     // dp[d][r][c]: d번째 원소를 r번째 그룹 차례에 대하여,
     // c = 0: r번째 그룹에 d번째 원소를 넣어 이어간다
     // c = 1: d번째 원소를 버려서 r번째 그룹을 마친다
+    dp[0][0][1] = 0;
     dp[0][1][0] = numbers[0];
 
     // Please write your code here.
